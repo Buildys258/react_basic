@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_对props进行限制</title>
+</head>
+<body>
+     <!-- 准备好一个容器 -->
+     <div id="test1"></div>
+     <div id="test2"></div>
+     <div id="test3"></div>
+
+     <!-- 引入react核心库 -->
+     <script src="../js/react.development.js"></script>
+     <!-- 引入react-dom 用于支持react操作dom -->
+     <script src="../js/react-dom.development.js"></script>
+     <!-- 引入babel，用于jsx转为js -->
+     <script src="../js/babel.min.js"></script>
+     <!-- 引入prop-types,用于对组件标签进行限制 -->
+     <script src="../js/prop-types.js"></script>
+     <script type="text/babel"> /* 此处一定要写babel */
+    //创建组件
+    class Person extends React.Component {
+        render() {
+            // console.log(this)
+            const {name,age,sex} = this.props
+            // props是只读的
+            // this.props.name = 'jack' 此行代码会报错
+            return (
+                <ul>
+                    <li>性名:{name}</li>
+                    <li>性别:{sex}</li>
+                    <li>年龄:{age+ 1}</li>
+                </ul>
+
+            )
+        }   
+    }
+    // 对标签进行类型的限制
+    Person.propTypes = {
+        name:PropTypes.string.isRequired,
+        sex:PropTypes.string,
+    }
+    //  默认参数
+    Person.defaultProps = {
+        sex:'不男不女'
+    }
+    // 渲染组件到页面
+    const p = {name:'老刘', age:18, sex:'女'}
+    ReactDOM.render(<Person name="张三" age={20} />, document.getElementById('test1'))
+    ReactDOM.render(<Person name="李五" age={20} sex="男"/>, document.getElementById('test2'))
+    ReactDOM.render(<Person {...p}/>, document.getElementById('test3'))
+     </script>
+</body>
+</html>
