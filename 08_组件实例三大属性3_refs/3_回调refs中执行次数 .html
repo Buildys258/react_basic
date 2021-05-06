@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3_回调refs中执行次数 </title>
+</head>
+<body>
+     <!-- 准备好一个容器 -->
+     <div id="test"></div>
+
+     <!-- 引入react核心库 -->
+     <script src="../js/react.development.js"></script>
+     <!-- 引入react-dom 用于支持react操作dom -->
+     <script src="../js/react-dom.development.js"></script>
+     <!-- 引入babel，用于jsx转为js -->
+     <script src="../js/babel.min.js"></script>
+ 
+     <script type="text/babel"> /* 此处一定要写babel */
+     //创建组件
+     class Demo extends React.Component {
+        //展示左侧输入框的数据
+        showData = () => {
+            const {input1} = this
+            alert(input1.value)
+            // console.log(this.refs.input1) //这里是真实dom
+        }
+        //展示右侧输入框的数据
+        showData2 = () => {
+
+        }
+         render() {
+            return(
+            <div>
+                <input type="text"/>
+            </div>
+            )
+        }
+     }
+    //  渲染组件到页面
+    ReactDOM.render(<Demo/>, document.getElementById('test'))
+     </script>
+</body>
+</html>
